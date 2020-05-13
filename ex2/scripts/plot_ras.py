@@ -8,8 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-TARGET_DIR = sys.argv[1]
-
+TARGET_DIR = "/home/manos/Desktop/ras"
 try:
     os.mkdir(TARGET_DIR)
 except FileExistsError:
@@ -19,7 +18,7 @@ except FileExistsError:
         quit()
 print('Directory created')
 
-with os.scandir(sys.argv[2]) as it:
+with os.scandir("/home/manos/Desktop/outputs/outputs_branch_ras") as it:
     for entry in it:
         if entry.is_file():
             print(entry.name)
@@ -33,17 +32,14 @@ with os.scandir(sys.argv[2]) as it:
                 if line.startswith("Total Instructions"):
                     total_ins = int(line.split()[2])
                     print('Total instructions: ', total_ins)
-                if line.startswith("RAS: (Correct - Incorrect)"):
+                if line.startswith("RAS"):
                     line = fp.readline()
                     tokens = line.split(':')
                     while(len(tokens) > 1):
-                        n = tokens[0].lstrip().split()
-                        name = n[0]+'-'+n[1].lstrip('(')
-
-                        x_axis.append(name)
+                        x_axis.append(tokens[0].lstrip())
                         correct, incorrect = map(int, tokens[1].split())
                         total = correct + incorrect
-                        mpki = incorrect/(total_ins/1000)
+                        mpki = incorrect/(total/100)
                         mpki_axis.append(mpki)
                         line = fp.readline()
                         tokens = line.split(':')
@@ -60,9 +56,9 @@ with os.scandir(sys.argv[2]) as it:
             ax1.set_xticklabels(x_axis, rotation=45)
             #plt.xticks(xAx, x_axis, rotation=45)
             ax1.set_xlim(-0.5, len(x_axis) - 0.5)
-            ax1.set_ylim(min(mpki_axis) - 0.005, max(mpki_axis) + 0.005)
-            ax1.set_ylabel("$MPKI$")
+            ax1.set_ylim(min(mpki_axis) - 0.05, max(mpki_axis) + 0.05)
+            ax1.set_ylabel("$Miss Ratio$")
             line1 = ax1.plot(mpki_axis, label="mpki", color="green",marker='o')
 
-            plt.title(benchmark + " MPKI")
+            plt.title(benchmark + " Miss Ratio")
             plt.savefig(os.path.join(TARGET_DIR, benchmark+'.png'), bbox_inches='tight')
