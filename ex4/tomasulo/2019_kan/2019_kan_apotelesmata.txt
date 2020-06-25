@@ -1,0 +1,24 @@
+list of executed operations:
+ OP,IS, EX, WR,CMT, COMMENTS
+ 0, 1, 2-5, 6, 7  cache miss
+ 1, 2, 7-9, 10, 11  raw F0
+ 2, 3, 4-7, 8, 12  cache miss
+ 3, 4, 11-15, 16, 17  raw F1, raw F4
+ 4, 5, 6-7, 9, 18  cdb
+ 5, 6, 10-11, 12, 19  branch prediction: outcome = NT, prediction = T, raw R9
+ 9, 7, 8-8, 11, -1  cache hit, cdb
+ 10, 8, -1--1, -1, -1  FU busy, raw F4, raw F5
+ 11, 9, 10-11, -1, -1  
+ 12, 10, 11-12, -1, -1  
+ 6, 13, 14-17, 18, 20  cache miss
+ 7, 14, 19-23, 24, 25  FU busy, raw F2
+ 8, 15, 25-27, 28, 29  raw F2
+ 9, 16, 17-17, 19, 30  cache hit, cdb
+ 10, 17, 29-31, 32, 33  FU busy, raw F4, raw F5
+ 11, 18, 19-20, 21, 34  
+ 12, 19, 20-21, 22, 35  
+ 13, 20, 23-24, 25, 36  branch prediction: outcome = NT, prediction = T, raw R8
+ 0, 21, 22-22, 23, -1  cache hit
+ 1, 22, -1--1, -1, -1  FU busy, raw F0, raw F4
+ 2, 23, 24-25, -1, -1  cache miss, cdb
+ 14, 26, 33-36, 37, 38  cache miss, raw F4

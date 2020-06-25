@@ -1,0 +1,7 @@
+gcc: 16.66%
+mcf: 100.0%
+zeusmp: 100.0%
+cactusADM: 100.0%
+gobmk: 14.07%
+sjeng: 23.44%
+GemsFDTD: 89.02%
